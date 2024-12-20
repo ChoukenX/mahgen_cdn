@@ -1,7 +1,5 @@
 # 🀄️mahgen
 
-[English](./README.EN.md) | 中文
-
 ![](https://img.shields.io/npm/l/mahgen) | 
 ![](https://img.shields.io/npm/v/mahgen) | 
 ![](https://img.shields.io/npm/types/mahgen)
@@ -45,8 +43,6 @@
 
 ![牌河模式](docs/images/river.png)
 
-你可以访问 [这个网站](https://mahgen.ericlab.cc) 进行体验，它使用了 `mahgen` 在线生成用户指定的牌型图片，这些图片可以保存到本地用于其他用途。例如，上面展示的麻将牌型图片都是使用这个网站生成的。
-
 ---
 
 ## 安装
@@ -56,18 +52,10 @@
 你可以借助 `script` 标签直接通过 CDN 来使用 `mahgen`：
 
 ```html
-<script src="https://unpkg.com/mahgen/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ChoukenX/mahgen_cdn/dist/index.umd.js"></script>
 ```
 
 你也可以将这一文件下载到本地并自行提供服务。
-
-**使用 NPM**
-
-另外，你也可以使用 `npm` 安装 `mahgen`：
-
-```shell
-npm install --save mahgen
-```
 
 ---
 
@@ -78,6 +66,7 @@ npm install --save mahgen
 * `data-seq` 属性用于指定这个标签所生成图片的牌型（其语法见后文）。
 * `data-show-err` 属性用于指定在输入的序列不合法时，是否在生成图片的 `alt` 属性中展示错误原因。这个属性没有值。
 * `data-river-mode` 属性用于指定生成牌河模式的图片而非手牌牌型，此时序列的语义略有不同（见后文）。
+* `scale` 属性用于缩放生成的图像大小，默认为1.0。
 
 下面是一个使用 `mahgen` 的简单示例：
 
@@ -88,7 +77,7 @@ npm install --save mahgen
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mahgen Example</title>
-    <script src="https://unpkg.com/mahgen/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ChoukenX/mahgen_cdn/dist/index.umd.js"></script>
 </head>
 <body>
     <h1>Mahgen Example</h1>
@@ -106,13 +95,14 @@ npm install --save mahgen
 `mahgen` 还提供了如下的 API：
 
 ```
-Mahgen.render(seq: string, river: boolean): Promise<string>;
+Mahgen.render(seq: string, river: boolean, scale: number): Promise<string>;
 ```
 
 其中：
 
 * 参数 `seq` 是用于描述牌型的字符串序列（其语法见下节）；
 * 参数 `river` 用于表示是否生成牌河模式的图片；
+* 参数 `scale` 用于缩放生成的图片；
 * 返回值是所生成的图片结果的 base64 数据，它可以用于如 HTML 中 `<img>` 标签的 `src` 属性。
 
 请注意这是一个异步函数，因此你可能需要使用 `await` 关键字或 `.then()` 方法获取其执行结果。
@@ -267,17 +257,7 @@ Mahgen.render(seq: string, river: boolean): Promise<string>;
 > 
 > ![123^456_7m^8^9^1^2^4^5^8^7^2s](./docs/images/river.png)
 
----
 
-## Hexo 插件
-
-`mahgen` 还提供了用于 [Hexo](https://hexo.io/) 的插件，参见 [hexo-mahgen](https://github.com/eric200203/hexo-mahgen)。
-
----
-
-## 后续开发计划
-
-* 支持缩放等参数设置
 
 ---
 
@@ -285,6 +265,7 @@ Mahgen.render(seq: string, river: boolean): Promise<string>;
 
 * 感谢 [@black-desk](https://github.com/black-desk) ，他的项目 [mahjim](https://github.com/black-desk/mahjim) 为本项目提供了灵感。
 * 感谢 [最完整的日本麻将中文维基百科](http://wiki.lingshangkaihua.com/mediawiki/index.php/%E9%A6%96%E9%A1%B5)，本项目的图片素材来源于这个网站。
+* 感谢 [eric03742](https://github.com/eric03742/mahgen) 提供的开源仓库
 
 ---
 
@@ -298,12 +279,5 @@ Mahgen.render(seq: string, river: boolean): Promise<string>;
 
 ### v1.0.0
 
-添加 `data-river-mode` 属性，用于支持生成牌河模式的图片。
+添加 `scale` 属性，支持图片缩放。
 
-### v0.3.1
-
-添加 `data-show-err` 属性，用于在输入序列不合法时显示具体的错误信息。
-
-### v0.3.0
-
-`mahgen` 第一版.
