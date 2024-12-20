@@ -6,11 +6,8 @@
 
 `mahgen` 是一个为给定的日本麻将的牌型生成对应牌面图片的工具库。`mahgen` 是 ***Mah**jong* ***Gen**erator* 的缩写。
 
-<<<<<<< HEAD
-=======
 该项目fork自大佬 [eric03742](https://github.com/eric03742/mahgen)
 
->>>>>>> main
 ---
 
 ## 特性
